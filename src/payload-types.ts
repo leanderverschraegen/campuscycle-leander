@@ -94,6 +94,9 @@ export interface Config {
     timeSlots: {
       bookings: 'bookings';
     };
+    repairs: {
+      bookings: 'bookings';
+    };
   };
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
@@ -413,6 +416,11 @@ export interface Repair {
   name: string;
   price: number;
   description?: string | null;
+  bookings?: {
+    docs?: (number | Booking)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -721,6 +729,7 @@ export interface RepairsSelect<T extends boolean = true> {
   name?: T;
   price?: T;
   description?: T;
+  bookings?: T;
   updatedAt?: T;
   createdAt?: T;
 }
