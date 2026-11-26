@@ -392,6 +392,7 @@ export interface Booking {
   name: string;
   email: string;
   note?: string | null;
+  repairs?: (number | Repair)[] | null;
   /**
    * The member who was logged in when they booked (members' area only).
    */
@@ -400,6 +401,18 @@ export interface Booking {
    * Filled in by the booking form. It stops the same form from saving two bookings.
    */
   requestId?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "repairs".
+ */
+export interface Repair {
+  id: number;
+  name: string;
+  price: number;
+  description?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -431,18 +444,6 @@ export interface Member {
     | null;
   password?: string | null;
   collection: 'members';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "repairs".
- */
-export interface Repair {
-  id: number;
-  name: string;
-  price: number;
-  description?: string | null;
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -706,6 +707,7 @@ export interface BookingsSelect<T extends boolean = true> {
   name?: T;
   email?: T;
   note?: T;
+  repairs?: T;
   member?: T;
   requestId?: T;
   updatedAt?: T;
